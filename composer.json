@@ -1,0 +1,50 @@
+{
+    "name": "signifly/laravel-pivot-events",
+    "description": "Trigger Eloquent model pivot events when attaching, detaching or updating.",
+    "homepage": "https://github.com/signifly/laravel-pivot-events",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Morten Poul Jensen",
+            "email": "mpj@signifly.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Travis Elkins",
+            "email": "te@signifly.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/database": "^5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0",
+        "orchestra/testbench": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Signifly\\PivotEvents\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Signifly\\PivotEvents\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+            ],
+            "aliases": {
+            }
+        }
+    }
+}
