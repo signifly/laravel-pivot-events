@@ -11,18 +11,23 @@ trait HasPivotEvents
 
     public function setPivotChanges(string $type, string $relation, array $ids = [])
     {
-        foreach ($ids as $id => $attributes) {
-            $this->pivotChanges[$type][$relation][$id] = $attributes;
-        }
+        collect($ids)->each(function ($attributes, $id) use ($type, $relation) {
+            data_set($this->pivotChanges, "{$type}.{$relation}.{$id}", $attributes);
+        });
     }
 
     public function getPivotChanges($type = null)
     {
         if ($type) {
-            return $this->pivotChanges[$type];
+            return collect(data_get($this->pivotChanges, $type));
         }
 
-        return $this->pivotChanges;
+        return collect($this->pivotChanges);
+    }
+
+    public function getPivotChangeIds($type, $relation)
+    {
+        return collect($this->getPivotChanges("{$type}.{$relation}"))->keys();
     }
 
     public static function pivotAttaching($callback)

@@ -42,7 +42,7 @@ class PivotEventsTest extends TestCase
 
         User::pivotAttaching(function ($model) use (&$receivedRoleIds) {
             $receivedRoleIds = $receivedRoleIds->merge(
-                array_keys(data_get($model->getPivotChanges('attach'), 'roles'))
+                $model->getPivotChangeIds('attach', 'roles')
             );
         });
 
