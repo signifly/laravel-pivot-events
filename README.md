@@ -28,23 +28,20 @@ class User
         static::pivotAttaching(function ($model) {
             // To get related changes
             $model->getPivotChanges();
-            // returns all pivot changes
-            // [
-            //    'attach' => [
-            //        'shops' => [
-            //            2 => ['scopes' => 'orders'],
-            //        ],
-            //    ],
-            // ]
+            // return Collection(['attach' => ['roles' => [1 => ['scopes' => 'orders']]]])
 
-            // To get related changes for specific type
+            // To get related changes for a specific type
             $model->getPivotChanges('attach');
-            // returns pivot changes for attach
-            // [
-            //    'shops' => [
-            //        2 => ['scopes' => 'orders'],
-            //    ],
-            // ]
+            // return Collection(['roles' => [1 => ['scopes' => 'orders']]])
+            
+            // You can get nested changes
+            // values are $id => $attributes
+            $model->getPivotChanges('attach.roles');
+            // return Collection([1 => ['scopes' => 'orders']])
+
+            // To get related ids for a specific type and relation
+            $model->getPivotChangeIds('attach', 'roles');
+            // return Collection([1])
         });
 
         static::pivotAttached(function ($model) {
