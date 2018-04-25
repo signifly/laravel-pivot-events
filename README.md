@@ -28,9 +28,23 @@ class User
         static::pivotAttaching(function ($model) {
             // To get related changes
             $model->getPivotChanges();
+            // returns all pivot changes
+            // [
+            //    'attach' => [
+            //        'shops' => [
+            //            2 => ['scopes' => 'orders'],
+            //        ],
+            //    ],
+            // ]
 
             // To get related changes for specific type
             $model->getPivotChanges('attach');
+            // returns pivot changes for attach
+            // [
+            //    'shops' => [
+            //        2 => ['scopes' => 'orders'],
+            //    ],
+            // ]
         });
 
         static::pivotAttached(function ($model) {
