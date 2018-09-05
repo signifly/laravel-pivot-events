@@ -17,7 +17,7 @@ class BelongsToMany extends BaseBelongsToMany
     public function attach($id, array $attributes = [], $touch = true)
     {
         $this->parent->setPivotChanges('attach', $this->getRelationName(), [
-            $id => $attributes,
+            $this->parseId($id) => $attributes,
         ]);
 
         if ($this->parent->firePivotAttachingEvent() === false) {
@@ -74,7 +74,7 @@ class BelongsToMany extends BaseBelongsToMany
     public function updateExistingPivot($id, array $attributes, $touch = true)
     {
         $this->parent->setPivotChanges('update', $this->getRelationName(), [
-            $id => $attributes,
+            $this->parseId($id) => $attributes,
         ]);
 
         if ($this->parent->firePivotUpdatingEvent() === false) {
