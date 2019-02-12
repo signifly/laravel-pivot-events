@@ -2,8 +2,6 @@
 
 namespace Signifly\PivotEvents\Test;
 
-use Exception;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Schema\Blueprint;
 use Orchestra\Testbench\TestCase as Orchestra;
 

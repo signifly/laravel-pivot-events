@@ -12,7 +12,7 @@ class PivotEventsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function it_dispatches_pivot_attach_events()
+    public function it_dispatches_pivot_attach_events()
     {
         Event::fake();
 
@@ -27,12 +27,12 @@ class PivotEventsTest extends TestCase
             'scopes' => null,
         ]);
 
-        Event::assertDispatched('eloquent.pivotAttaching: ' . User::class);
-        Event::assertDispatched('eloquent.pivotAttached: ' . User::class);
+        Event::assertDispatched('eloquent.pivotAttaching: '.User::class);
+        Event::assertDispatched('eloquent.pivotAttached: '.User::class);
     }
 
     /** @test */
-    function it_receives_pivot_changes_for_attach_events()
+    public function it_receives_pivot_changes_for_attach_events()
     {
         $user = $this->createUser();
         $role = $this->createRole();
@@ -58,7 +58,7 @@ class PivotEventsTest extends TestCase
     }
 
     /** @test */
-    function it_dispatches_pivot_detach_events()
+    public function it_dispatches_pivot_detach_events()
     {
         Event::fake();
 
@@ -73,12 +73,12 @@ class PivotEventsTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        Event::assertDispatched('eloquent.pivotDetaching: ' . User::class);
-        Event::assertDispatched('eloquent.pivotDetached: ' . User::class);
+        Event::assertDispatched('eloquent.pivotDetaching: '.User::class);
+        Event::assertDispatched('eloquent.pivotDetached: '.User::class);
     }
 
     /** @test */
-    function it_dispatches_pivot_update_events()
+    public function it_dispatches_pivot_update_events()
     {
         Event::fake();
 
@@ -95,8 +95,8 @@ class PivotEventsTest extends TestCase
             'scopes' => 'orders',
         ]);
 
-        Event::assertDispatched('eloquent.pivotUpdating: ' . User::class);
-        Event::assertDispatched('eloquent.pivotUpdated: ' . User::class);
+        Event::assertDispatched('eloquent.pivotUpdating: '.User::class);
+        Event::assertDispatched('eloquent.pivotUpdated: '.User::class);
     }
 
     protected function createRole(array $overwrites = [])
