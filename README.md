@@ -1,5 +1,11 @@
 # Easily add Eloquent model pivot events to your Laravel app
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/signifly/laravel-pivot-events.svg?style=flat-square)](https://packagist.org/packages/signifly/laravel-pivot-events)
+[![Build Status](https://img.shields.io/travis/signifly/laravel-pivot-events/master.svg?style=flat-square)](https://travis-ci.org/signifly/laravel-pivot-events)
+[![StyleCI](https://styleci.io/repos/130852365/shield?branch=master)](https://styleci.io/repos/130852365)
+[![Quality Score](https://img.shields.io/scrutinizer/g/signifly/laravel-pivot-events.svg?style=flat-square)](https://scrutinizer-ci.com/g/signifly/laravel-pivot-events)
+[![Total Downloads](https://img.shields.io/packagist/dt/signifly/laravel-pivot-events.svg?style=flat-square)](https://packagist.org/packages/signifly/laravel-pivot-events)
+
 The `signifly/laravel-pivot-events` package allows you to easily add Eloquent model pivots events to your Laravel app.
 
 Below is a small example of how to use it.
