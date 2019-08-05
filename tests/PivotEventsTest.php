@@ -99,6 +99,31 @@ class PivotEventsTest extends TestCase
         Event::assertDispatched('eloquent.pivotUpdated: '.User::class);
     }
 
+    /** @test */
+    public function it_resets_pivot_changes_after_an_event_has_been_dispatched()
+    {
+        $user = $this->createUser();
+        $roleA = $this->createRole(['name' => 'role-a']);
+        $roleB = $this->createRole(['name' => 'role-b']);
+
+        $calledTimes = 0;
+
+        User::pivotAttached(function ($model) use (&$calledTimes) {
+            $this->assertCount(1, $model->getPivotChanges());
+            $calledTimes++;
+        });
+
+        $user->roles()->attach($roleA->id);
+        $this->assertCount(0, $user->getPivotChanges());
+
+        $user->roles()->attach($roleB->id);
+        $this->assertCount(0, $user->getPivotChanges());
+
+        $this->assertCount(2, $user->roles);
+
+        $this->assertEquals(2, $calledTimes);
+    }
+
     protected function createRole(array $overwrites = [])
     {
         return Role::create(array_merge([
