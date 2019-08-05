@@ -28,6 +28,8 @@ class BelongsToMany extends BaseBelongsToMany
 
         $this->parent->firePivotAttachedEvent();
 
+        $this->parent->resetPivotChanges();
+
         return $result;
     }
 
@@ -60,6 +62,8 @@ class BelongsToMany extends BaseBelongsToMany
 
         $this->parent->firePivotDetachedEvent();
 
+        $this->parent->resetPivotChanges();
+
         return $result;
     }
 
@@ -84,6 +88,8 @@ class BelongsToMany extends BaseBelongsToMany
         $result = parent::updateExistingPivot($id, $attributes, $touch);
 
         $this->parent->firePivotUpdatedEvent();
+
+        $this->parent->resetPivotChanges();
 
         return $result;
     }
