@@ -2,6 +2,7 @@
 
 namespace Signifly\PivotEvents;
 
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -9,14 +10,14 @@ trait HasPivotEvents
 {
     protected $pivotChanges = [];
 
-    public function setPivotChanges(string $type, string $relation, array $ids = [])
+    public function setPivotChanges(string $type, string $relation, array $ids = []): void
     {
         collect($ids)->each(function ($attributes, $id) use ($type, $relation) {
             data_set($this->pivotChanges, "{$type}.{$relation}.{$id}", $attributes);
         });
     }
 
-    public function getPivotChanges($type = null)
+    public function getPivotChanges($type = null): Collection
     {
         if ($type) {
             return collect(data_get($this->pivotChanges, $type));
@@ -25,9 +26,14 @@ trait HasPivotEvents
         return collect($this->pivotChanges);
     }
 
-    public function getPivotChangeIds($type, $relation)
+    public function getPivotChangeIds($type, $relation): Collection
     {
         return collect($this->getPivotChanges("{$type}.{$relation}"))->keys();
+    }
+
+    public function resetPivotChanges(): void
+    {
+        $this->pivotChanges = [];
     }
 
     public static function pivotAttaching($callback)
@@ -98,15 +104,12 @@ trait HasPivotEvents
     public function getObservableEvents()
     {
         return array_merge(
+            parent::getObservableEvents(),
             [
-                'retrieved', 'creating', 'created', 'updating', 'updated',
-                'saving', 'saved', 'restoring', 'restored',
-                'deleting', 'deleted', 'forceDeleted',
                 'pivotAttaching', 'pivotAttached',
                 'pivotDetaching', 'pivotDetached',
                 'pivotUpdating', 'pivotUpdated',
-            ],
-            $this->observables
+            ]
         );
     }
 
@@ -123,9 +126,16 @@ trait HasPivotEvents
      * @param  string  $relationName
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    protected function newBelongsToMany(Builder $query, Model $parent, $table, $foreignPivotKey, $relatedPivotKey,
-                                        $parentKey, $relatedKey, $relationName = null)
-    {
+    protected function newBelongsToMany(
+        Builder $query,
+        Model $parent,
+        $table,
+        $foreignPivotKey,
+        $relatedPivotKey,
+        $parentKey,
+        $relatedKey,
+        $relationName = null
+    ) {
         return new BelongsToMany($query, $parent, $table, $foreignPivotKey, $relatedPivotKey, $parentKey, $relatedKey, $relationName);
     }
 }
