@@ -8,11 +8,6 @@
             "name": "Morten Poul Jensen",
             "email": "mpj@signifly.com",
             "role": "Developer"
-        },
-        {
-            "name": "Travis Elkins",
-            "email": "te@signifly.com",
-            "role": "Developer"
         }
     ],
     "require": {
