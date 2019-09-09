@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-pivot-events` will be documented in this file
 
+## 1.4.0 - 2019-09-09
+
+- Added support for Laravel 6.0
+
 ## 1.3.0 - 2019-03-06
 
 - Added support for Laravel 5.8
