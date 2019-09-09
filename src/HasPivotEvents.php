@@ -19,11 +19,9 @@ trait HasPivotEvents
 
     public function getPivotChanges($type = null): Collection
     {
-        if ($type) {
-            return collect(data_get($this->pivotChanges, $type));
-        }
-
-        return collect($this->pivotChanges);
+        return $type
+            ? collect(data_get($this->pivotChanges, $type))
+            : collect($this->pivotChanges);
     }
 
     public function getPivotChangeIds($type, $relation): Collection
