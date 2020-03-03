@@ -2,9 +2,9 @@
 
 namespace Signifly\PivotEvents;
 
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 trait HasPivotEvents
 {

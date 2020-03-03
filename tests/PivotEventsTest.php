@@ -2,10 +2,10 @@
 
 namespace Signifly\PivotEvents\Test;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Signifly\PivotEvents\Test\Models\Role;
 use Signifly\PivotEvents\Test\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PivotEventsTest extends TestCase
 {
