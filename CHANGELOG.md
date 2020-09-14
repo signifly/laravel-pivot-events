@@ -2,25 +2,29 @@
 
 All notable changes to `laravel-pivot-events` will be documented in this file
 
+## 1.5.1 - 2020-09-14
+
+- Add support for Laravel 8
+
 ## 1.5.0 - 2020-03-03
 
-- Added support for Laravel 7
+- Add support for Laravel 7
 
 ## 1.4.0 - 2019-09-09
 
-- Added support for Laravel 6.0
+- Add support for Laravel 6.0
 
 ## 1.3.0 - 2019-03-06
 
-- Added support for Laravel 5.8
+- Add support for Laravel 5.8
 
 ## 1.2.0 - 2018-09-27
 
-- Added support for Laravel 5.7
+- Add support for Laravel 5.7
 
 ## 1.1.2 - 2018-09-05
 
-- Fixed: Parse id when attaching or updating existing pivot data
+- Fix: Parse id when attaching or updating existing pivot data
 
 ## 1.1.1 - 2018-05-16
 
@@ -33,7 +37,7 @@ All notable changes to `laravel-pivot-events` will be documented in this file
 
 ## 1.0.1 - 2018-04-24
 
-- Updated observable events 
+- Update observable events 
 
 ## 1.0.0 - 2018-04-24
 
