@@ -16,9 +16,11 @@ class BelongsToMany extends BaseBelongsToMany
      */
     public function attach($id, array $attributes = [], $touch = true)
     {
-        $this->parent->setPivotChanges('attach', $this->getRelationName(), [
-            $this->parseId($id) => $attributes,
-        ]);
+        $idsWithAttributes = collect($id)->mapWithKeys(function ($id) use ($attributes) {
+            return [$id => $attributes];
+        })->all();
+
+        $this->parent->setPivotChanges('attach', $this->getRelationName(), $idsWithAttributes);
 
         if ($this->parent->firePivotAttachingEvent() === false) {
             return false;
@@ -42,23 +44,27 @@ class BelongsToMany extends BaseBelongsToMany
      */
     public function detach($ids = null, $touch = true)
     {
+        $resultIds = [];
         if (is_null($ids)) {
-            $ids = $this->query->pluck(
-                $this->query->qualifyColumn($this->relatedKey)
-            )->toArray();
+            $resultIds = $this->query->pluck($this->query->qualifyColumn($this->relatedKey))->toArray();
         }
 
-        $idsWithAttributes = collect($ids)->mapWithKeys(function ($id) {
+        $idsWithAttributes = collect($resultIds)->mapWithKeys(function ($id) {
             return [$id => []];
         })->all();
-
+        
         $this->parent->setPivotChanges('detach', $this->getRelationName(), $idsWithAttributes);
 
         if ($this->parent->firePivotDetachingEvent() === false) {
             return false;
         }
 
-        $result = parent::detach($ids, $touch);
+        if ($ids === null) {
+            $result = parent::detach(null, $touch);
+        }
+        if ($ids !== null) {
+            $result = parent::detach($ids, $touch);
+        }
 
         $this->parent->firePivotDetachedEvent();
 
